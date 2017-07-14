@@ -91,7 +91,8 @@ def parameters(total_kmers, target_disk, target_memory, k, verbose=False):
     else:
         v = total_kmers
     # DSK Paramters
-    number_of_iterations = int(math.ceil(total_kmers * b_disk / target_disk))
+    number_of_iterations = int(
+        math.ceil(float(total_kmers) * b_disk / target_disk))
     number_of_partitions = int(
         math.ceil((v * b) / (0.7 * target_memory * number_of_iterations)))
     use_dsk = 0.7 * target_memory < b * v

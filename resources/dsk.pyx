@@ -9,7 +9,7 @@ try:
     from pybloomfilter import BloomFilter
 except ImportError:
     raise ImportError('pybloomfilter module is required. ' +
-                      'Use pip install pybloomfiltermmap3')
+                      'Use pip install pybloomfiltermmap')
 
 try:
     import mmh3
@@ -56,7 +56,7 @@ def dsk(file_name, int k, int n, long capacity, double error_rate,
       # Assign functions to local variables for performance improvement
       writers = [files[j].write for j in range(parts)]
       chunk_appender = [chunks[j].append for j in range(parts)]
-      chunk_cleaner = [chunks[j].clear for j in range(parts)]
+      # chunk_cleaner = [chunks[j].clear for j in range(parts)]
       chunk_joiner = ''.join
 
       with open(file_name, 'r') as f:
@@ -74,7 +74,9 @@ def dsk(file_name, int k, int n, long capacity, double error_rate,
                           if len(chunks[_j]) == CHUNK_LIMIT:
                               # write to file
                               writers[_j](chunk_joiner(chunks[_j]))
-                              chunk_cleaner[_j]()
+                              # chunk_cleaner[_j]()
+                              chunks[_j] = []
+                              chunk_appender[_j] = chunks[_j].append
               line_num += 1
 
       # Write remaining kmers
@@ -120,7 +122,7 @@ def dsk(file_name, int k, int n, long capacity, double error_rate,
               start_populate = time.time()
               print('Populating the heap...')
 
-          for kmer, count in kmer_counter.items():
+          for kmer, count in kmer_counter.iteritems():
               # insert to the heap if count is bigger than minimum
               if count > heap[0][0]:
                   heap_pushpop(heap, (count, kmer.rstrip()))

@@ -60,7 +60,7 @@ def bfcounter(file_name, int k, int n, long capacity, double error_rate, verbose
         start_populate = time.time()
         print('Populating the heap...')
 
-    for kmer, count in kmer_counter.items():
+    for kmer, count in kmer_counter.iteritems():
         # insert to the heap if count is bigger than minimum
         if count > heap[0][0]:
             heap_pushpop(heap, (count, kmer))
