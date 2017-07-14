@@ -37,7 +37,9 @@ def dsk(file_name, int k, int n, long capacity, double error_rate,
   hash_function = mmh3.hash
   heap_pushpop = heapq.heappushpop
 
-  cdef int CHUNK_LIMIT = math.floor(capacity / 10)  # write approximately in 10 calls
+
+  # Total memory of chunks shouldn't exceed the limit.
+  cdef long CHUNK_LIMIT = math.floor(capacity / parts)
 
   heap = []
   for i in range(n):
