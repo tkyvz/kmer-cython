@@ -1,5 +1,5 @@
 # K-mer Counter
-K-mer counter counts the most frequent `n` `k-mers` in a given FASTQ file. This project has been developed and tested with Python 3.5.2.
+K-mer counter counts the most frequent `n` `k-mers` in a given FASTQ file. This project has been developed and tested with Python 2.7.13.
 
 ## Getting Started
 
@@ -11,7 +11,7 @@ K-mer counter uses two different algorithms:
    DSK uses hash values of the k-mers for grouping and partitioning the k-mers according to the specified target disk and memory spaces. K-mers are written in separate files, according to their hash value, for making the memory usage within the target value. For making the disk usage within the target value, this operation is done in multiple iterations.
 
 ### Prerequisites
-K-mer counter uses Python 3.5.2, and usage of virtual environment is encouraged.
+K-mer counter uses Python 2.7.13, and usage of virtual environment is encouraged.
 If you don't have virtual environment, you can use
 ```
 pip install virtualenv
@@ -27,9 +27,9 @@ pip install -r requirements.txt
 ```
 
 #### Used Packages
-1. **pybloomfiltermmap3:** Bloom filter implementation for Python 3
+1. **pybloomfiltermmap:** Bloom filter implementation for Python
 2. **mmh3:** MurmurHash implementation for Python
-3. **Cython:** Required by *pybloomfiltermmap3* module
+3. **Cython:** For compiling Cython dependencies
 
 There are also other packages used for code styling an linter purposes, such as
 *flake8*, *pep8* etc.

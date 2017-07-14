@@ -31,9 +31,6 @@ ext_modules = [
 
 ext_modules = cythonize(ext_files)
 
-if sys.version_info[0] < 3:
-    raise SystemError('This program is for Python Version 3 and above')
-
 setup(
     name='kmercounter',
     version='1.0.0',
